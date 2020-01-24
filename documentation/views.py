@@ -23,11 +23,11 @@ class IndexTemplateView(View):
 
 class DocumentationTemplateView(View):
     def get(self, request, value):
-        order = ['topic', 'order']
+        order_lst = ['topic', 'order']
         context = {
-            'topics': Topic.objects.all(),
+            'topics': Topic.objects.all().order_by('order'),
 
-            'components': Component.objects.order_by(*order)
+            'components': Component.objects.order_by(*order_lst)
         }
         return render(request, 'documentation/docs-page.html', context)
         # html = render_to_string('documentation/docs-page.html#' + value, context)

@@ -19,6 +19,7 @@ class TypeComponent(models.Model):
 
 class Topic(models.Model):
     name = models.CharField(max_length=100)
+    order = models.IntegerField(max_length=100)
     desc = models.TextField(max_length=200)
     link = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
@@ -39,6 +40,7 @@ class TypeOfComponent(models.Model):
 class Component(models.Model):
     name = models.CharField(max_length=100)
     info = models.TextField(max_length=1000)
+    key_term = models.CharField(max_length=100)
     order = models.IntegerField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     type_ref = models.ForeignKey(TypeOfComponent, on_delete=models.CASCADE)

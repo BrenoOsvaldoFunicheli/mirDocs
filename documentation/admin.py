@@ -20,7 +20,7 @@ class KeywordAdmin(admin.ModelAdmin):
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'order']
 
 
 @admin.register(TypeOfComponent)
