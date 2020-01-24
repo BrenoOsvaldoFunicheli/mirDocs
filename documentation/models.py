@@ -37,7 +37,8 @@ class TypeOfComponent(models.Model):
 
 
 class Component(models.Model):
-    info = models.TextField(max_length=500)
+    name = models.CharField(max_length=100)
+    info = models.TextField(max_length=1000)
     order = models.IntegerField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     type_ref = models.ForeignKey(TypeOfComponent, on_delete=models.CASCADE)
@@ -45,6 +46,8 @@ class Component(models.Model):
     def __str__(self):
         return self.type_ref.name + " number " + str(self.order) + " of the " + self.topic.name
 
+
+# order_position = models.AutoField(primary_key=False)
 
 class KeyWord(models.Model):
     name = models.CharField(max_length=100)
