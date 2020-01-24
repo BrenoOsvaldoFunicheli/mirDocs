@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, UpdateView, CreateView, DeleteView, View
-from .models import PostBlog
+from .models import *
 from django.template.loader import render_to_string
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, FileResponse
 
@@ -13,7 +13,7 @@ class IndexTemplateView(View):
 
     def get(self, request):
         context = {
-            'items': PostBlog.objects.all()
+            'items': Topic.objects.all()
         }
 
         html = render_to_string('documentation/index.html', context)
@@ -23,8 +23,9 @@ class IndexTemplateView(View):
 
 class DocumentationTemplateView(View):
     def get(self, request, value):
-        print(value)
         context = {
+            'topics': Topic.objects.all()
+            'component': Component.objects.all()
         }
         return render(request, 'documentation/docs-page.html', context)
         # html = render_to_string('documentation/docs-page.html#' + value, context)
