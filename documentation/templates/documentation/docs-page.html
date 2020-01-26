@@ -3,7 +3,7 @@
 {% load static %}
 {% load doc_tags %}
 <head>
-    <title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+    <title>mirDocs</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -78,13 +78,14 @@
         <nav id="docs-nav" class="docs-nav navbar">
             {% for item in topics %}
             <ul class="section-items list-unstyled nav flex-column pb-3">
-                <li class="nav-item section-title"><a class="nav-link scrollto active" href="#{{item.name}}"><span
+                <li class="nav-item section-title"><a class="nav-link scrollto active" href="#{{item.key_term}}"><span
                         class="theme-icon-holder mr-2"><i class="{{ item.icon }}"></i></span>{{item.name}}</a></li>
 
-                {% for component in components %}
-                {% if component.topic|filter_components:item %}
-                <li class="nav-item"><a class="nav-link scrollto" href="#{{component.name}}">{{component}}</a></li>
-                {%endif%}
+                {% for section in sections %}
+                {% if section.topic|filter_components:item %}
+                <li class="nav-item"><a class="nav-link scrollto" href="#{{section.key_term}}">{{section.name}}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
             {% endfor %}
@@ -93,23 +94,32 @@
     <div class="docs-content">
         <div class="container">
 
-            {% for topic in topics %}
+            {% for item in topics %}
             <article class="docs-article" id="section-1">
                 <header class="docs-header">
-                    <h1 class="docs-heading">{{topic}}<span class="docs-time">Last updated: 2019-06-01</span></h1>
+                    <h1 class="docs-heading">{{item}}<span class="docs-time">Last updated: 2019-06-01</span></h1>
 
 
                 </header>
 
 
-                {% for component in components %}
-                {% if component.topic|filter_components:topic %}
-                <section class="docs-section" id="{{component.name}}">
-                    <h2 class="section-heading">{{component.name}}</h2>
-                    <p>{{component.info}}</p>
-                </section>
+                {% for section in sections %}
+                {% if section.topic|filter_components:item %}
+                <section class="docs-section" id="{{section}}">
+                    <h2 class="section-heading">{{section}}</h2>
+                    {% for comp in components %}
 
-                {%endif%}
+                    {% if comp|is_paragraph:section %}
+                    <p>{{comp.info}}</p>
+                    {% endif %}
+
+                    {% if comp|is_header:section %}
+                    <h5>Github Code Example:</h5>
+                    {% endif %}
+
+                    {% endfor %}
+                </section>
+                {% endif %}
                 {% endfor %}
 
 

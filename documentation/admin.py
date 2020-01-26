@@ -13,6 +13,11 @@ class PageAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(KeyWord)
 class KeywordAdmin(admin.ModelAdmin):
     pass

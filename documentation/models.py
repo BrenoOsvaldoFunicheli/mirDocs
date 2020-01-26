@@ -19,15 +19,25 @@ class TypeComponent(models.Model):
 
 class Topic(models.Model):
     name = models.CharField(max_length=100)
-    order = models.IntegerField(max_length=100)
+    order = models.IntegerField()
     desc = models.TextField(max_length=200)
     link = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
+    key_term = models.CharField(max_length=100)
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
+
+class Section(models.Model):
+    name = models.CharField(max_length=100)
+    order = models.IntegerField()
+    key_term = models.CharField(max_length=100)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class TypeOfComponent(models.Model):
     name = models.CharField(max_length=100)
@@ -40,13 +50,12 @@ class TypeOfComponent(models.Model):
 class Component(models.Model):
     name = models.CharField(max_length=100)
     info = models.TextField(max_length=1000)
-    key_term = models.CharField(max_length=100)
     order = models.IntegerField()
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
     type_ref = models.ForeignKey(TypeOfComponent, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.type_ref.name + " number " + str(self.order) + " of the " + self.topic.name
+        return self.type_ref.name
 
 
 # order_position = models.AutoField(primary_key=False)
