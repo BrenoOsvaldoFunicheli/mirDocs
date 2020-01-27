@@ -31,5 +31,13 @@ def is_header(component, type_comp):
 
 
 @register.filter
+def is_code(component, type_comp):
+    if component.type_ref.name == 'code':
+        if component.section.name == type_comp.name:
+            return True
+    return False
+
+
+@register.filter
 def is_figure(component, type):
     return type == 'fig'
