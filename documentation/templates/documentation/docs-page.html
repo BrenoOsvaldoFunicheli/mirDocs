@@ -40,9 +40,9 @@
                     <span></span>
                 </button>
                 <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon mr-2"
-                                                                                      src="{% static 'documentation/assets/images/coderdocs-logo.svg"
+                                                                                      src="{% static 'documentation/assets/images/coderdocs-logo.svg' %} "
                                                                                       alt="logo"><span
-                        class="logo-text">Coder<span class="text-alt">Docs</span></span></a></div>
+                        class="logo-text">miR<span class="text-alt">Docs</span></span></a></div>
             </div><!--//docs-logo-wrapper-->
             <div class="docs-top-utilities d-flex justify-content-end align-items-center">
                 <div class="top-search-box d-none d-lg-flex">
@@ -77,6 +77,7 @@
         </div>
         <nav id="docs-nav" class="docs-nav navbar">
             {% for item in topics %}
+
             <ul class="section-items list-unstyled nav flex-column pb-3">
                 <li class="nav-item section-title"><a class="nav-link scrollto active" href="#{{item.key_term}}"><span
                         class="theme-icon-holder mr-2"><i class="{{ item.icon }}"></i></span>{{item.name}}</a></li>
@@ -95,7 +96,7 @@
         <div class="container">
 
             {% for item in topics %}
-            <article class="docs-article" id="section-1">
+            <article class="docs-article" id="{{item.key_term}}">
                 <header class="docs-header">
                     <h1 class="docs-heading">{{item}}<span class="docs-time">Last updated: 2019-06-01</span></h1>
 
@@ -105,7 +106,7 @@
 
                 {% for section in sections %}
                 {% if section.topic|filter_components:item %}
-                <section class="docs-section" id="{{section}}">
+                <section class="docs-section" id="{{section.key_term}}">
                     <h2 class="section-heading">{{section}}</h2>
                     {% for comp in components %}
 
@@ -114,7 +115,7 @@
                     {% endif %}
 
                     {% if comp|is_header:section %}
-                    <h5>Github Code Example:</h5>
+                    <h5>{{comp.info}}</h5>
                     {% endif %}
 
                     {% endfor %}
